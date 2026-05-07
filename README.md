@@ -52,8 +52,6 @@ music_w_shop/
 ├── store/                   # 状态管理（可选 Zustand/Redux）
 │   ├── cartStore.ts         # 购物车状态
 │   └── userStore.ts         # 用户状态
-├── styles/                  # 样式
-│   ├── globals.css          # 全局样式
 ├── public/                  # 静态资源
 │   ├── images/
 │   └── logo.png
