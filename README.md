@@ -8,9 +8,6 @@
 ```
 music_w_shop/
 ├── app/                      # App Router 核心路由
-│   ├── (layout)/             # 分组布局（商城整体共用布局）
-│   │   ├── layout.tsx        # 商城全局布局（导航栏、底部）
-│   │   └── page.tsx          # 商城首页
 │   ├── goods/                # 商品模块
 │   │   ├── page.tsx          # 商品列表页
 │   │   └── [id]/
@@ -32,7 +29,8 @@ music_w_shop/
 │   │       └── route.ts      # 订单接口
 │   ├── favicon.ico
 │   ├── globals.css           # 全局样式
-│   └── layout.tsx           # 根布局
+│   ├── page.tsx              # 商城首页
+│   └── layout.tsx           # 根布局（商城全局布局（导航栏、底部））
 ├── components/               # 公共组件
 │   ├── layout/
 │   │   ├── NavBar.tsx       # 商城顶部导航
@@ -53,7 +51,7 @@ music_w_shop/
 │   ├── cartStore.ts         # 购物车状态
 │   └── userStore.ts         # 用户状态
 ├── public/                  # 静态资源
-│   ├── images/
+│   ├── images/              # 图片
 │   └── logo.png
 ├── next.config.js
 ├── tailwind.config.ts

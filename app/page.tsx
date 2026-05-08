@@ -1,9 +1,7 @@
-
-import Demo from "@/components/demo"; 
 export default function Home() {
   return (
     <div>
-      <Demo />
+     首页内容
     </div>
   );
 }
