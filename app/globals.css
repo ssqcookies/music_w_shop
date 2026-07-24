@@ -1,51 +1,138 @@
-@import "tailwindcss";
+/* ========== Tailwind‑v4 固定入口（官方新版语法，不要写旧的 @tailwind base ========== */
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 
+/* ========== 1. 原SCSS变量全部迁移到v4官方 @theme ========== */
+@theme {
+  /* 尺寸变量，页面可以使用 w-content‑w、h-navbar‑h */
+  --spacing-content-w: 1440px;
+  --spacing-navbar-h: 73px;
+  --spacing-logo-w: 290px;
+  --spacing-logo-h: 70px;
+  --spacing-search-h: 38px;
+  --spacing-search-w: 300px;
+  --spacing-cart-h: 36px;
+  --spacing-cart-w: 36px;
+  --spacing-swiper-h: 480px;
+  --spacing-banner-h: 320px;
+  --spacing-category-h: 80px;
+  --spacing-recommend-h: 300px;
+  --spacing-img-h: 263px;
+  --spacing-img-w: 263px;
+  --spacing-footer-h: 160px;
+  --spacing-footer-content-h: 118px;
+
+  /* 字号，页面使用 text-fs12、text-fs14 */
+  --font-fs12: 12px;
+  --font-fs14: 14px;
+
+  /* 颜色，页面使用 text‑title、bg‑bg‑gray */
+  --color-title: #333333;
+  --color-sub: #999;
+  --color-textRed: #d74d45;
+  --color-priceRed: #d33a31;
+  --color-baseWhite: #ffffff;
+  --color-bgGray: #f2f2f2;
+  --color-bgNav:#191919;
+}
+
+/* ========== 2. @layer base：全局默认样式（v4禁止在这里 @apply @theme生成的类，改用 var()） ========== */
 @layer base {
-  * {
+  body {
+    font-size: var(--font-fs14);
+    color: var(--color-title);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-size: 14px;
-    color: #333;
-  }
-  ul, li {
-    list-style: none;
   }
 }
 
+/* ========== 3. @layer components：固定无参数组件类 ========== */
 @layer components {
+  /* 原 .wrapper 容器，宽度1100px居中 */
   .wrapper {
-    width: 1100px;
+    width: var(--spacing-content-w);
     margin: 0 auto;
   }
-  .page-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+
+  /* 对应 @include normalFlex() 默认参数 row, space‑between，仅默认情况使用 */
+  .flex-normal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
-  .btn-main {
-    background: var(--color-primary);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-  }
+  /* 轮播左右箭头公共基础类 替代 @mixin swiperBtn */
+.swiper-btn {
+  position: absolute;
+  top: 208px;
+  width: 37px;
+  height: 63px;
+  background-color: #000;
+  opacity: 0.1;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
+.swiper-btn > span {
+  display: inline-block;
+  width: 37px;
+  height: 63px;
+}
+
+/* 左箭头 */
+.swiper-btn-prev {
+  left: 20px;
+}
+.swiper-btn-prev > span {
+  background: url('/images/pointlist.png') no-repeat 0 0;
+}
+
+/* 右箭头 */
+.swiper-btn-next {
+  right: 20px;
+}
+.swiper-btn-next > span {
+  background: url('/images/pointlist.png') no-repeat -48px 0;
+}
+}
+
+/* ========== 4. @layer utilities：工具类，替换无参数mixin ========== */
 @layer utilities {
+  /* 替换 @mixin bgSpride()，图片放置在 public/images/spride.png */
   .bg-sprite {
-    background-image: url("@/public/images/spride.png");
+    background-image: url("/images/spride.png");
     background-repeat: no-repeat;
   }
-  .flex-center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  /* logo专用精灵定位 */
+  .sprite-logo {
+    background-position: 0 -48px;
   }
-  .text-ellipsis {
+  /* 单行文本省略：替换 @mixin textEllipsis() */
+  .text-ellipsis-single {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  /* 固定两行省略；动态行数不在css里写，tsx中使用任意值写法 */
+  .text-ellipsis-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* 调试边框，默认红色，替换 @mixin border() */
+  .border-debug {
+    border: 1px solid red;
+  }
+
 }

@@ -14,8 +14,11 @@ import type { Metadata } from "next"; //Next.js 的类型定义，用来规范 m
 import { Geist, Geist_Mono } from "next/font/google"; //Next.js 内置的 Google 字体，是 Vercel 官方推荐的无衬线字体和等宽字体。
 import { Analytics } from "@vercel/analytics/react"; //Vercel 的 Analytics 组件，用于收集和分析网站的访问数据。
 import "./globals.css";
+import "antd/dist/reset.css";
 
-
+import ReduxProvider from '@/components/providers/ReduxProvider';
+import MswProvider from "@/components/providers/MswProvider";
+import LoginQRModal from '@/components/LoginQRModal';
 
 import NavBar from "@/components/layout/NavBar"; // 顶部导航栏
 import Footer from "@/components/layout/Footer"; // 底部导航栏
@@ -61,7 +64,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children,// children 就是当前路由对应的 page.tsx 的内容
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -71,10 +74,23 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
        <body className="min-h-screen flex flex-col">
+       {/* MSW 放在最外层 */}
+        <MswProvider>
+
+        <ReduxProvider>
+        {/* 全局导航栏 所有页面都显示 */}
         <NavBar />
+         {/* 页面内容插槽：当前页面 page.tsx 的内容会渲染在这里 */}
+         {/* 全局包裹，所有页面都能拿到redux上下文 */}
+
         {children}
+      {/* 全局只挂载一次，所有页面共用 */}
+        <LoginQRModal />
         <Analytics />
+         {/* 全局底部栏 所有页面都显示 */}
         <Footer />
+           </ReduxProvider>
+        </MswProvider>
        </body>
     </html>
   );

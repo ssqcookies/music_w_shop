@@ -7,6 +7,18 @@ const nextConfig: NextConfig = {
     PORT: process.env.PORT || "3000",
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || `http://localhost:${process.env.PORT || 3000}` ,
   },
+   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.music.126.net',
+      },
+         {
+        protocol: 'http',
+        hostname: '**.music.126.net',
+      }
+    ]
+  },
   basePath: process.env.BASE_PATH || "",
   output: 'standalone', // 打包后生成独立的文件，避免在生产环境使用代理
 };

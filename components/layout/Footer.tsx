@@ -9,9 +9,10 @@ export interface IProps {
 const Footer = memo(function Footer(props: IProps) {
   const { children } = props;
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
       <footer className="bg-gray-100 py-4 text-center text-gray-500">
-        © 2025 网易云商城
+          <div>服务条款| 隐私政策| 儿童隐私政策| 版权投诉| 投资者关系| 广告合作 | 联系我们</div>
+          <div> © 2023 老版网易云商城 </div>
       </footer>
     </div>
   );

@@ -53,8 +53,9 @@ music_w_shop/
 ├── public/                  # 静态资源
 │   ├── images/              # 图片
 │   └── logo.png
+├── styles/                  # 样式   
+│   └── globals.scss         
 ├── next.config.js
-├── tailwind.config.ts
 ├── tsconfig.json
 └── package.json
 ```
