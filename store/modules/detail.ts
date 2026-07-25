@@ -45,9 +45,9 @@ const detailSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchDetailById.fulfilled, (state, action: PayloadAction<IDetailPageInfo>) => {
+      .addCase(fetchDetailById.fulfilled, (state, action) => {
         state.loading = false;
-        state.info = action.payload;
+        state.info = action.payload.data;
       })
       .addCase(fetchDetailById.rejected, (state, action) => {
         state.loading = false;
