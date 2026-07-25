@@ -3,6 +3,14 @@ import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, InternalAxiosReq
 
 const BASE_URL = "";
 const TIME_OUT = 1000 * 60;
+export const getApiPrefix = () => {
+  if (process.env.NODE_ENV === 'development') {
+    // 本地走MSW原始路径
+    return '';
+  }
+  // 生产走Next.js App Router真实API路由 /api/xxx
+  return '/api';
+};
 
 // 后端统一返回格式
 export interface IResultData<T> {

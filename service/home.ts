@@ -1,4 +1,4 @@
-import hyRequest from "./index";
+import hyRequest, { getApiPrefix } from "./index";
 
 export interface ISearchSuggest {
   id: number;
@@ -74,15 +74,19 @@ export const getSearchSuggest = () => {
 
 // 02-获取首页的数据( 轮播图 / 分类 .... )
 export const getHomeInfo = () => {
-  return hyRequest.get<IHomeInfo>("/home/info");
+  const base = getApiPrefix();    
+  return hyRequest.get<IHomeInfo>(`${base}/home/info`);
 };
 
 // 03-编辑推荐的商品 hotproduct_v2
 export const getHotproduct_v2 = () => {
-  return hyRequest.get<IHotproductV2>("/hotproduct_v2/gets");
+  const base = getApiPrefix();    
+
+  return hyRequest.get<IHotproductV2>(`${base}//hotproduct_v2/gets`);
 };
 
 // 04-编辑推荐的商品 allProduct/gets
 export const getAllProduct = () => {
-  return hyRequest.get<IAllProdcut>("/allProduct/gets");
+  const base = getApiPrefix();   
+  return hyRequest.get<IAllProdcut>(`${base}//allProduct/gets`);
 };
