@@ -82,11 +82,11 @@ export const getHomeInfo = () => {
 export const getHotproduct_v2 = () => {
   const base = getApiPrefix();    
 
-  return hyRequest.get<IHotproductV2>(`${base}//hotproduct_v2/gets`);
+  return hyRequest.get<IHotproductV2>(`${base}/hotproduct_v2/gets`);
 };
 
 // 04-编辑推荐的商品 allProduct/gets
 export const getAllProduct = () => {
   const base = getApiPrefix();   
-  return hyRequest.get<IAllProdcut>(`${base}//allProduct/gets`);
+  return hyRequest.get<IAllProdcut>(`${base}/allProduct/gets`);
 };
