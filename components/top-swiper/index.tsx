@@ -11,7 +11,6 @@ export interface IProps {
 
 const TopSwiper: FC<IProps> = memo(function (props) {
   const { children, banners } = props;
-    console.log(props,"banners")
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const bannerRef = useRef<ComponentRef<typeof Carousel>>(null);
