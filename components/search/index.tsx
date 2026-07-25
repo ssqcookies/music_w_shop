@@ -11,7 +11,6 @@ export interface IProps {
 
 const Search:FC<IProps> = memo(function Search(props){
     const { children,searchData } = props;
-    console.log(searchData)
   const [inputFocus, setInputFocus] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState("蓝牙耳机");
   const router = useRouter();
@@ -38,13 +37,8 @@ const Search:FC<IProps> = memo(function Search(props){
   }
 
 
-  function goToSearchPage(name: string) {
-    // router.push({
-    //   pathname: "/search",
-    //   query: {
-    //     q: name,
-    //   },
-    // });
+  function goToSearchPage(id: string | number) {
+    router.push(`/details/${id}`);
   }
 
     return(

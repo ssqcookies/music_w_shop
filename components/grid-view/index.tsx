@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import type { FC, ReactNode } from "react";
 import type { IHotProduct, IProduct } from "@/service/home";
+import Link from "next/link";
 
 /**
  * 商品网格列表组件
@@ -26,31 +27,33 @@ const GridView: FC<IGridViewProps> = memo(function GridView(props) {
         {newProducts.map((item: IProduct) => (
           <Col span={6} key={item.id}>
             <div className="cursor-pointer overflow-hidden bg-baseWhite">
-              <div className="relative h-img-h w-full overflow-hidden bg-bgGray">
+              <div className="relative  w-full overflow-hidden bg-bgGray">
                 {item.coverUrl && (
+                <Link href={`/details/${item.id}`}>
                   <Image
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-300 hover:scale-105"
                     src={item.coverUrl}
                     alt={item.name ?? "商品"}
-                    width={263}
+                    width={300}
                     height={263}
                   />
+                    </Link>
                 )}
+              
               </div>
-              <div className="p-[10px]">
-                {item.couponLabelDesc && (
+              <div className="p-[10px] ml-[20px] ">
+                {item.name && (
+                  <p className="mb-[8px] h-[43px] line-clamp-2 font-fs14 text-title">
+                     {item.couponLabelDesc && (
                   <span className="mb-[6px] inline-block rounded-[2px] border border-priceRed px-[4px] py-px font-fs12 text-priceRed">
                     {item.couponLabelDesc}
                   </span>
-                )}
-                {item.name && (
-                  <p className="mb-[8px] line-clamp-2 font-fs14 text-title">
-                    {item.name}
+                )} {item.name}
                   </p>
                 )}
-                <div className="flex items-baseline gap-[6px]">
+                <div className="flex items-center gap-[6px] ">
                   {item.minPrice !== undefined && (
-                    <span className="font-fs14 font-bold text-priceRed">
+                    <span className="font-fs30 font-[900] text-priceRed">
                       ¥{item.minPrice}
                     </span>
                   )}

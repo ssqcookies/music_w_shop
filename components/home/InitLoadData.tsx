@@ -22,8 +22,8 @@ export default function InitLoadData() {
       dispatch(fetchHotproduct_v2());
     }
     if (allProduct && allProduct && allProduct.length === 0) {
-      dispatch(fetchAllProduct());
-    }
+          dispatch(fetchAllProduct());
+        }
   }, [dispatch, navbar.id, bannerList.length, hotProduct, allProduct]);
 
   return null;

@@ -62,5 +62,5 @@ class HYRequest {
 
 export default new HYRequest({
   baseURL: BASE_URL,
-  timeout: TIME_OUT,
+  timeout: TIME_OUT ,
 });

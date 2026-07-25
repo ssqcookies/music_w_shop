@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
+import { getDetailMock } from './detail.mock';
 
 export const handlers = [
-
   http.get('/api/home/search-suggest', async () => {
     await new Promise(resolve => setTimeout(resolve, 400));
     return HttpResponse.json({
@@ -145,7 +145,7 @@ export const handlers = [
           {
             id: 118808,
             products: {
-              id: 11728001,
+              id: 68001,
               type: 2,
               name: 'i12真无线蓝牙耳机 智能触控 双耳运动跑步 安卓苹果通用',
               minPrice: 49,
@@ -158,7 +158,7 @@ export const handlers = [
           {
             id: 118809,
             products: {
-              id: 11728002,
+              id: 55001,
               type: 1,
               name: '20000毫安超薄便携充电宝 快充大容量移动电源',
               minPrice: 69,
@@ -171,7 +171,20 @@ export const handlers = [
           {
             id: 118810,
             products: {
-              id: 11728003,
+              id: 550031,
+              type: 3,
+              name: '桌面可折叠手机懒人支架 直播追剧通用支撑架',
+              minPrice: 19.9,
+              maxPrice: 19.9,
+              originalCost: 39.9,
+              couponLabelDesc: undefined,
+              coverUrl: 'https://p1.music.126.net/uw3neEFvpCV_BDYcfRXrHg==/109951173481992301.jpg?imageView=1&type=webp&thumbnail=486x0'
+            }
+          },
+          {
+            id: 118820,
+            products: {
+              id: 628001,
               type: 3,
               name: '桌面可折叠手机懒人支架 直播追剧通用支撑架',
               minPrice: 19.9,
@@ -185,4 +198,86 @@ export const handlers = [
       }
     });
   }),
+  http.get('/allProduct/gets', async () => {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    return HttpResponse.json({
+      code: 200,
+      data: {
+        count: 10,
+        hasMore: true,
+        allProduct: [
+            {
+            id: 118808, 
+            products: {
+              id: 11728002,
+              type: 1,
+              name: '《启示路》G.E.M.邓紫棋首部科幻小说| 平装版',
+              minPrice: 69,
+              maxPrice: 69,
+              originalCost: 129,
+              couponLabelDesc: '满59减15',  
+              showTip: true,
+              coverUrl: 'https://p1.music.126.net/cIrG0EJcFiSdkMqs0QE-TA==/109951171480140357.jpg?imageView=1&type=webp&thumbnail=486x0'
+            }
+          },
+          {
+            id: 118809,
+            products: {
+              id: 11728003,
+              type: 3,
+              name: 'Andy Yue音乐专辑NFC仿真黑胶可旋转冰箱贴',
+              minPrice: 19.9,
+              maxPrice: 19.9,
+              originalCost: 39.9,
+              couponLabelDesc: undefined,
+              showTip: false,
+              coverUrl: 'https://p1.music.126.net/rIBo4PTFYg_yovnTF8gLmg==/109951173448305450.jpg?imageView=1&type=webp&thumbnail=486x0'
+            }
+          },
+          {
+            id: 118810,
+            products: {
+              id: 11728004,
+              type: 3,
+              name: 'Taylor Swift 泰勒斯威夫特 - The Official Taylor Swift | The Eras Tour Book 时代巡演限量书籍【美版】',
+              minPrice: 551,
+              maxPrice: 551,
+              originalCost: 551,
+              couponLabelDesc: undefined,
+              showTip: false,
+              coverUrl:'https://p1.music.126.net/EcaaMpj9_lVhb77vtM_MDw==/109951170124059189.jpg?imageView=1&type=webp&thumbnail=486x0'
+            }
+          },
+          {
+            id: 118811,
+            products: {
+              id: 11728005,
+              type: 3,
+              name: '谢春花“一棵”自动雨伞 官方正版周边',
+              minPrice: 551,
+              maxPrice: 551,
+              originalCost: 551,
+              couponLabelDesc: undefined,
+              showTip: false,
+              coverUrl:'https://p1.music.126.net/OyoH48_g89EJw-6oc9tDNw==/109951165463169525.jpg?imageView=1&type=webp&thumbnail=486x0'
+            }
+          }
+        ]
+      }
+    });
+  }),
+
+  http.get('/special/getdetail', async (req) => {
+    // 解析URL参数
+    const url = new URL(req.request.url);
+    const specialTopicId = url.searchParams.get('specialTopicId') || '';
+  
+    // 拿到完整mock对象（本身就包含 code + data），直接返回
+    const mockRes = getDetailMock(specialTopicId);
+  
+    await new Promise(resolve => setTimeout(resolve, 300));
+  
+    return HttpResponse.json(mockRes);
+  })
+  
 ];

@@ -23,9 +23,16 @@
   --spacing-footer-content-h: 118px;
 
   /* 字号，页面使用 text-fs12、text-fs14 */
-  --font-fs12: 12px;
-  --font-fs14: 14px;
-
+  --font-size-fs12: 12px;
+  --font-size-fs14: 14px;
+  --font-size-fs24: 24px;
+  --font-size-fs28: 28px;
+  --font-size-fs32: 32px;
+  --font-size-fs36: 36px;
+  --font-size-fs40: 40px;
+  --font-size-fs44: 44px;
+  --font-size-fs48: 48px;
+  --font-size-fs52: 52px;
   /* 颜色，页面使用 text‑title、bg‑bg‑gray */
   --color-title: #333333;
   --color-sub: #999;

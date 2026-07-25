@@ -52,6 +52,7 @@ export interface IProduct {
   originalCost?: number;
   couponLabelDesc?: string;
   coverUrl?: string;
+  images?:string[];
 }
 export interface IHotProduct {
   id: number;
@@ -83,5 +84,5 @@ export const getHotproduct_v2 = () => {
 
 // 04-编辑推荐的商品 allProduct/gets
 export const getAllProduct = () => {
-  return hyRequest.get<IAllProdcut>("/hotproduct_v2/gets");
+  return hyRequest.get<IAllProdcut>("/allProduct/gets");
 };

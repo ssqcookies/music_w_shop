@@ -23,7 +23,7 @@ const SectionTitle: FC<ISectionTitleProps> = memo(function SectionTitle(props) {
   // if (error) return <div className="section-title">加载失败，请稍后重试</div>;
 
   return (
-    <div className="m-[20px_0px_6px_0px] font-fs24 color-title font-bold">
+    <div className="m-[20px_0px_6px_0px] font-fs36 color-title font-[900]">
       <div>{title}</div>
     </div>
   );

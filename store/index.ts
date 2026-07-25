@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import homeReducer from "./modules/home";
 import modalReducer from "./modules/modalSlice"
+import detailReducer from "./modules/detail"
 // ✅ 工厂函数：每次调用生成全新store实例（关键！）
 export const makeStore = () => {
   return configureStore({
     reducer: {
       home: homeReducer,
       modal: modalReducer,
+      detail: detailReducer // 新增详情模块
     },
   });
 };

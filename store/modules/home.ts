@@ -63,6 +63,12 @@ const homeSlice = createSlice({
     state.hasMore = payload.hasMore?? false;
   });
 
+  // ========== 接口4：所有商品 fetchAllProduct ==========
+  builder.addCase(fetchAllProduct.fulfilled, (state, { payload }) => {
+    state.allProduct = payload.allProduct?? [];
+    state.count = payload.count?? 0;
+  });
+
   },
 });
 

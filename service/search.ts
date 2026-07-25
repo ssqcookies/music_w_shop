@@ -18,7 +18,9 @@ export const getProductSearchData = (data: ISearchParam) => {
     `/store/api/product/search`,
     data,
     {
-      "Content-Type": "application/x-www-form-urlencoded",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
     }
   );
 };

@@ -19,6 +19,8 @@ import "antd/dist/reset.css";
 import ReduxProvider from '@/components/providers/ReduxProvider';
 import MswProvider from "@/components/providers/MswProvider";
 import LoginQRModal from '@/components/LoginQRModal';
+import '@/mocks/start'; 
+
 
 import NavBar from "@/components/layout/NavBar"; // 顶部导航栏
 import Footer from "@/components/layout/Footer"; // 底部导航栏
