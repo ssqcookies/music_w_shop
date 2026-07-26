@@ -70,30 +70,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="zh-CN"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-       <body className="min-h-screen flex flex-col">
-       {/* MSW 放在最外层 */}
-        <MswProvider>
+  // 只在 development 本地环境启用 MSW，production 直接不加载
+  const isDev = process.env.NODE_ENV === 'development';
 
-        <ReduxProvider>
-        {/* 全局导航栏 所有页面都显示 */}
+  const Content = (
+    <>
+      <ReduxProvider>
+        {/* 全局导航 */}
         <NavBar />
-         {/* 页面内容插槽：当前页面 page.tsx 的内容会渲染在这里 */}
-         {/* 全局包裹，所有页面都能拿到redux上下文 */}
-
+        {/* 路由页面插槽 */}
         {children}
-      {/* 全局只挂载一次，所有页面共用 */}
+        {/* 全局弹窗、底部 */}
         <LoginQRModal />
         <Analytics />
-         {/* 全局底部栏 所有页面都显示 */}
         <Footer />
-           </ReduxProvider>
-        </MswProvider>
-       </body>
+      </ReduxProvider>
+    </>
+  );
+
+  return (
+    <html lang="zh-CN" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-screen flex flex-col">
+        {isDev ? (
+          // 本地开发包裹MSW做Mock
+          <MswProvider>{Content}</MswProvider>
+        ) : (
+          // Vercel生产环境 完全删掉MSW，直接渲染内容
+          Content
+        )}
+      </body>
     </html>
   );
+
 }
