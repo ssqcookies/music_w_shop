@@ -1,4 +1,5 @@
-import hyRequest, { getApiPrefix } from "./index";
+import hyRequest from "./index";
+
 import type { IResultData } from "./index";
 import type { IProduct } from "./home";
 // 商品详情接口data结构
@@ -12,9 +13,9 @@ export interface IDetailPageInfo {
 }
 // 01-获取详细数据的接口
 export const getDetailPageInfo = (specialTopicId: string) => {
-  const base = getApiPrefix();
+
   return hyRequest.get<IResultData<IDetailPageInfo>>(
-    `${base}/special/getdetail?specialTopicId=${specialTopicId}`
+    `/api/special/getdetail?specialTopicId=${specialTopicId}`
   );
 };
 
