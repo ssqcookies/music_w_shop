@@ -10,8 +10,8 @@ export interface IHomeInitialState {
   categoryList: ICategory[];
   recommendList: IRecommend[];
   digitalInfo: IDigitalData | null;
-  hotProduct: IHotProduct[] | null;
-  allProduct: IProduct[] | null;
+  hotProduct: IHotProduct[];
+  allProduct: IProduct[];
   count: number;
   hasMore: boolean;
 }
@@ -25,7 +25,7 @@ const homeSlice = createSlice({
       defaultKey: "",
       configKey: []
     },
-      bannerList: [],
+    bannerList: [],
   categoryList: [],
   recommendList: [],
   digitalInfo: null,
