@@ -44,7 +44,7 @@ const detailSlice = createSlice({
   reducers: {
     // 清空详情（返回上一页用）
     clearDetail: (state) => {
-      state.info = null;
+      state.info = {};
     }
   },
   extraReducers: (builder) => {
