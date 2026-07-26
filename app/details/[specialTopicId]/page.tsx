@@ -1,5 +1,5 @@
 "use client";
-
+console.log('====== 详情页面组件执行了 ======'); // 这行是判断标杆
 import { memo,  useEffect, useState } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
