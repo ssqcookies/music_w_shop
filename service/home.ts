@@ -1,3 +1,4 @@
+import hyRequest from "./index";
 
 export interface ISearchSuggest {
   id: number;
