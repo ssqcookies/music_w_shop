@@ -1,41 +1,43 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { fetchSearchSuggest, fetchHomeInfo, fetchHotproduct_v2, fetchAllProduct } from '@/store/modules/home';
-
+import { usePathname } from 'next/navigation';
+import { useAppDispatch } from '@/store/hooks';
+import {
+  fetchSearchSuggest,
+  fetchHomeInfo,
+  fetchHotproduct_v2,
+  fetchAllProduct
+} from '@/store/modules/home';
 
 export default function InitLoadData() {
   const dispatch = useAppDispatch();
-  // 标记是否已经发起过初始化请求，永久只执行一次
-  const isInitLoad = useRef(false);
-
-  // 只拿基础数值，不把数组丢进依赖
-  const navbarId = useAppSelector(state => state.home.navbar.id);
-  const bannerCount = useAppSelector(state => state.home.bannerList.length);
-  const hotProductCount = useAppSelector(state => state.home.hotProduct.length);
-  const allProductCount = useAppSelector(state => state.home.allProduct.length);
+  const pathname = usePathname();
+  // 记录上一次路由，防止同页面重复触发
+  const prevPathRef = useRef<string | null>(null);
 
   useEffect(() => {
-    // 已经请求过，直接终止，杜绝无限循环
-    if (isInitLoad.current) return;
+    // ====================== 核心路由判断 ======================
+    // 仅在 首页 / 或者 /home 执行接口，进入详情/search等页面直接终止
+    const isHomePage = pathname === '/' || pathname === '/home';
+    if (!isHomePage) {
+      return;
+    }
 
-    // 标记已执行，后续任何渲染都不会再进这个逻辑
-    isInitLoad.current = true;
+    // 只有路由发生真正切换进入首页时才请求，同页面内部渲染不重复调用
+    if (prevPathRef.current === pathname) {
+      return;
+    }
 
-    // 下面只在页面挂载时执行一次，哪怕接口返回空数组也不会二次触发
-    if (navbarId === 0) {
-      dispatch(fetchSearchSuggest());
-    }
-    if (bannerCount === 0) {
-      dispatch(fetchHomeInfo());
-    }
-    if (hotProductCount === 0) {
-      dispatch(fetchHotproduct_v2());
-    }
-    if (allProductCount === 0) {
-      dispatch(fetchAllProduct());
-    }
-  }, [dispatch]); // 依赖只留dispatch，彻底断绝依赖变化触发重跑
+    // 标记已执行，避免本轮多次触发
+    prevPathRef.current = pathname;
+
+    // ====================== 进入首页，统一刷新所有接口 ======================
+    dispatch(fetchSearchSuggest());
+    dispatch(fetchHomeInfo());
+    dispatch(fetchHotproduct_v2());
+    dispatch(fetchAllProduct());
+
+  }, [pathname, dispatch]);
 
   return null;
 }
