@@ -21,7 +21,7 @@ export const handlers = [
   }),
 
 // 首页完整接口 GET /home/info
-  http.get('/home/info', async () => {
+  http.get('/api/home/info', async () => {
     await new Promise(resolve => setTimeout(resolve, 300));
     return HttpResponse.json({
       code: 200,
@@ -134,7 +134,7 @@ export const handlers = [
     });
   }),
 
-  http.get('/hotproduct_v2/gets', async () => {
+  http.get('/api/hotproduct_v2/gets', async () => {
     await new Promise(resolve => setTimeout(resolve, 300));
     return HttpResponse.json({
       code: 200,
@@ -198,7 +198,7 @@ export const handlers = [
       }
     });
   }),
-  http.get('/allProduct/gets', async () => {
+  http.get('/api/allProduct/gets', async () => {
     await new Promise(resolve => setTimeout(resolve, 300));
     return HttpResponse.json({
       code: 200,
@@ -267,7 +267,7 @@ export const handlers = [
     });
   }),
 
-  http.get('/special/getdetail', async (req) => {
+  http.get('/api/special/getdetail', async (req) => {
     // 解析URL参数
     const url = new URL(req.request.url);
     const specialTopicId = url.searchParams.get('specialTopicId') || '';
