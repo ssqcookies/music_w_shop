@@ -36,7 +36,6 @@ const Detail: FC<IDetailProps> = memo(function Detail(props) {
   const dispatch = useDispatch<IAppDispatch>();
   // 1. 从路由拿到动态参数 specialTopicId
   const params = useParams();
-  console.log('params完整对象：', params);
   const specialTopicId = params.specialTopicId as string;
 
   // 2. 从redux仓库获取详情数据、加载状态、错误信息
@@ -63,7 +62,8 @@ if (loading) return <div className="text-center py-20">商品详情加载中...<
 // 错误兜底
 if (error) return <div className="text-center py-20 text-red-500">{error}</div>;
 // 数据为空不渲染
-if (!info) return null;
+console.log("info",info)
+if (!info) return <div className="text-center py-20">暂无商品详情</div>;
 
 // 取出商品数组第一条
 const product = info.products?.[0];

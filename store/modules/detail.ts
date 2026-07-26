@@ -2,13 +2,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getDetailPageInfo, IDetailPageInfo } from '@/service/detail';
 
 interface DetailState {
-  info: IDetailPageInfo | null;
+  info: IDetailPageInfo;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: DetailState = {
-  info: null,
+  info: {
+    id:0,
+  name:'',
+  linkedUrl:'',
+  webPic:'',
+  specialTopicProducts: [],
+  products:[]
+  },
   loading: false,
   error: null
 };
@@ -20,6 +27,7 @@ export const fetchDetailById = createAsyncThunk(
     try {
       // 调用修改后的接口函数
       const res = await getDetailPageInfo(specialTopicId);
+      console.log("res",res)
       return res
     } catch (err) {
       console.error(err);
@@ -47,7 +55,10 @@ const detailSlice = createSlice({
       })
       .addCase(fetchDetailById.fulfilled, (state, action) => {
         state.loading = false;
-        state.info = action.payload.data;
+        console.log('进入fulfilled，payload完整：', action.payload);
+        // ========== 重点改这里 ==========
+        state.info = action.payload;
+       
       })
       .addCase(fetchDetailById.rejected, (state, action) => {
         state.loading = false;
