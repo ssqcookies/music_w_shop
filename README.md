@@ -59,3 +59,11 @@ music_w_shop/
 ├── tsconfig.json
 └── package.json
 ```
+
+
+### Mock 接口说明
+1. 项目使用 MSW 做本地接口模拟，`public/mockServiceWorker.js` 必须保留；
+2. 启动命令：
+   - `npm run dev`：自动启用Mock拦截本地接口；
+   - `npm run build` / 线上部署：MSW自动失效，不会影响生产路由与请求；
+3. 无需手动删除任何文件，环境变量自动控制开关。
